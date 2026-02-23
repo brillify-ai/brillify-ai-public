@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMS Messaging Consent - Brillify</title>
+    <meta name="description" content="Brillify SMS messaging consent and opt-in policy. Learn how we use SMS to communicate with our customers.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #0a0a0f;
+            --color-surface: #12121a;
+            --color-border: #1e1e2e;
+            --color-text: #e8e8ed;
+            --color-text-muted: #8888a0;
+            --color-accent: #4f8fff;
+            --color-accent-glow: rgba(79, 143, 255, 0.15);
+            --color-accent-hover: #6aa0ff;
+            --color-success: #34d399;
+            --font-display: 'Instrument Serif', Georgia, serif;
+            --font-body: 'DM Sans', -apple-system, sans-serif;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- Nav --- */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            color: var(--color-text);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .logo span { color: var(--color-accent); }
+
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--color-text); }
+
+        /* --- Main Content --- */
+        .page-content {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+
+        .page-header {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .page-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--color-accent);
+            margin-bottom: 1rem;
+        }
+
+        .page-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.05rem;
+            color: var(--color-text-muted);
+        }
+
+        .last-updated {
+            font-size: 0.82rem;
+            color: var(--color-text-muted);
+            margin-top: 0.75rem;
+        }
+
+        /* --- Sections --- */
+        .section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--color-text);
+        }
+
+        .section p {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .section ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 0.75rem;
+        }
+
+        .section ul li {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+            padding: 0.35rem 0 0.35rem 1.5rem;
+            position: relative;
+        }
+
+        .section ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+
+        /* --- Opt-In Demo Box --- */
+        .consent-demo {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+        }
+
+        .consent-demo h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+        }
+
+        .form-field {
+            margin-bottom: 1rem;
+        }
+
+        .form-field label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            margin-bottom: 0.4rem;
+        }
+
+        .form-field input[type="text"],
+        .form-field input[type="tel"] {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            color: var(--color-text);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-field input:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+
+        .consent-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin: 1.25rem 0;
+            padding: 1rem;
+            background: rgba(79, 143, 255, 0.05);
+            border: 1px solid rgba(79, 143, 255, 0.15);
+            border-radius: 8px;
+        }
+
+        .consent-checkbox input[type="checkbox"] {
+            margin-top: 3px;
+            accent-color: var(--color-accent);
+            flex-shrink: 0;
+            width: 18px;
+            height: 18px;
+        }
+
+        .consent-checkbox .consent-text {
+            font-size: 0.88rem;
+            color: var(--color-text-muted);
+            line-height: 1.55;
+        }
+
+        .consent-checkbox .consent-text a {
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        .consent-checkbox .consent-text a:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.85rem 2rem;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.25s;
+            cursor: pointer;
+            border: none;
+            background: var(--color-accent);
+            color: #fff;
+            width: 100%;
+            text-align: center;
+        }
+        .btn:hover {
+            background: var(--color-accent-hover);
+            box-shadow: 0 4px 24px rgba(79, 143, 255, 0.3);
+        }
+
+        /* --- Info Boxes --- */
+        .info-box {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .info-box.highlight {
+            border-color: rgba(79, 143, 255, 0.3);
+            background: rgba(79, 143, 255, 0.05);
+        }
+
+        .info-box p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .info-box code {
+            background: rgba(79, 143, 255, 0.1);
+            color: var(--color-accent);
+            padding: 0.15rem 0.45rem;
+            border-radius: 4px;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
+        /* --- Footer --- */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 2.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 760px;
+            margin: 2rem auto 0;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        footer p {
+            font-size: 0.82rem;
+            color: var(--color-text-muted);
+        }
+
+        .footer-links { display: flex; gap: 1.5rem; }
+        .footer-links a {
+            font-size: 0.82rem;
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: var(--color-text); }
+
+        @media (max-width: 640px) {
+            nav { padding: 1rem 1.25rem; }
+            .page-content { padding: 7rem 1.25rem 3rem; }
+            .consent-demo { padding: 1.5rem; }
+            footer { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="/" class="logo">Brillify<span>.</span></a>
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/#contact">Contact</a>
+    </div>
+</nav>
+
+<main class="page-content">
+    <div class="page-header">
+        <p class="page-label">SMS Messaging Policy</p>
+        <h1 class="page-title">SMS Messaging Consent &amp; Opt-In</h1>
+        <p class="page-subtitle">How Brillify collects consent and communicates with customers via SMS.</p>
+        <p class="last-updated">Last updated: February 22, 2025</p>
+    </div>
+
+    <!-- SECTION: Overview -->
+    <div class="section">
+        <h2>Overview</h2>
+        <p>Brillify ("we", "us", "our") provides AI-powered business solutions including scheduling, appointment management, and customer communication services. As part of these services, we may send SMS (text) messages to customers who have provided their explicit consent to receive such messages.</p>
+        <p>This page describes how we collect consent, what messages we send, and how recipients can opt out at any time.</p>
+    </div>
+
+    <!-- SECTION: How We Collect Consent -->
+    <div class="section">
+        <h2>How We Collect Consent</h2>
+        <p>We obtain explicit, informed consent from consumers before sending any SMS messages. Consent is collected through one or more of the following methods:</p>
+        <ul>
+            <li>Online scheduling forms where the customer provides their phone number and agrees to receive SMS messages</li>
+            <li>Service request forms on our website or our clients' websites</li>
+            <li>In-person or over-the-phone verbal consent documented in our systems when a customer books a service appointment</li>
+            <li>Written consent forms signed by the customer at the time of service</li>
+        </ul>
+        <p>In all cases, consent is voluntary. Providing consent to receive SMS messages is not a condition of purchasing any goods or services.</p>
+    </div>
+
+    <!-- SECTION: Sample Opt-In Experience -->
+    <div class="section">
+        <h2>Sample Opt-In Experience</h2>
+        <p>Below is a representative example of how customers provide consent to receive SMS messages when scheduling a service appointment:</p>
+    </div>
+
+    <!-- Opt-In Demo Form -->
+    <div class="consent-demo">
+        <h3>Schedule a Service Appointment</h3>
+        <div class="form-field">
+            <label for="demo-name">Full Name</label>
+            <input type="text" id="demo-name" placeholder="Jane Smith">
+        </div>
+        <div class="form-field">
+            <label for="demo-phone">Phone Number</label>
+            <input type="tel" id="demo-phone" placeholder="(555) 123-4567">
+        </div>
+        <div class="consent-checkbox">
+            <input type="checkbox" id="demo-consent">
+            <div class="consent-text">
+                <label for="demo-consent">
+                    By checking this box, I consent to receive SMS text messages from Brillify and its service partners regarding my appointment scheduling, service reminders, confirmations, and related updates. Message frequency varies. Message and data rates may apply. Reply <strong>STOP</strong> to opt out at any time. Reply <strong>HELP</strong> for assistance. See our <a href="/privacy-policy.html">Privacy Policy</a> and <a href="/terms-of-service.html">Terms of Service</a>.
+                </label>
+            </div>
+        </div>
+        <button type="button" class="btn" onclick="return false;">Book Appointment</button>
+    </div>
+
+    <!-- SECTION: Types of Messages -->
+    <div class="section">
+        <h2>Types of Messages We Send</h2>
+        <p>Once a consumer has opted in, they may receive the following types of SMS messages:</p>
+        <ul>
+            <li><strong>Appointment confirmations</strong> — confirming a scheduled service appointment</li>
+            <li><strong>Appointment reminders</strong> — reminders ahead of upcoming appointments</li>
+            <li><strong>Schedule changes</strong> — notifications about rescheduled or canceled appointments</li>
+            <li><strong>Service updates</strong> — status updates related to an active service request</li>
+            <li><strong>Follow-up messages</strong> — post-service follow-ups and satisfaction inquiries</li>
+        </ul>
+        <p>We do not send marketing, promotional, or advertising messages via SMS unless the consumer has separately and explicitly opted in to receive marketing communications.</p>
+    </div>
+
+    <!-- SECTION: Message Frequency -->
+    <div class="section">
+        <h2>Message Frequency</h2>
+        <p>Message frequency varies based on your service activity. Typically, customers receive between 1 and 10 messages per month related to their appointments and service requests. You will never receive more messages than necessary to support your scheduled services.</p>
+    </div>
+
+    <!-- SECTION: Opt-Out -->
+    <div class="section">
+        <h2>How to Opt Out</h2>
+        <p>You can opt out of receiving SMS messages at any time using any of the following methods:</p>
+
+        <div class="info-box highlight">
+            <p>Reply <code>STOP</code> to any message you receive from us. You will receive a one-time confirmation that you have been unsubscribed and will receive no further messages.</p>
+        </div>
+
+        <div class="info-box">
+            <p>Reply <code>HELP</code> to any message for assistance, or contact us at <strong>support@brillify.ai</strong>.</p>
+        </div>
+
+        <p>After opting out, you may receive one final confirmation message. No further messages will be sent unless you re-subscribe.</p>
+    </div>
+
+    <!-- SECTION: Costs -->
+    <div class="section">
+        <h2>Message &amp; Data Rates</h2>
+        <p>Standard message and data rates may apply depending on your mobile carrier and plan. Brillify does not charge any additional fees for SMS messages. Contact your wireless carrier for details about your messaging plan.</p>
+    </div>
+
+    <!-- SECTION: Supported Carriers -->
+    <div class="section">
+        <h2>Supported Carriers</h2>
+        <p>Our SMS messaging service is compatible with all major U.S. mobile carriers including AT&T, Verizon, T-Mobile, Sprint, and most regional carriers. Carriers are not liable for delayed or undelivered messages.</p>
+    </div>
+
+    <!-- SECTION: Privacy -->
+    <div class="section">
+        <h2>Privacy &amp; Data Protection</h2>
+        <p>We respect your privacy. Phone numbers and consent records are stored securely and are used only for the purposes described in this policy. We do not sell, share, or rent your phone number or personal information to third parties for marketing purposes.</p>
+        <p>For complete details on how we handle your data, please review our <a href="/privacy-policy.html" style="color: var(--color-accent); text-decoration: none;">Privacy Policy</a>.</p>
+    </div>
+
+    <!-- SECTION: Contact -->
+    <div class="section">
+        <h2>Contact Us</h2>
+        <p>If you have any questions about our SMS messaging practices, please contact us:</p>
+        <div class="info-box">
+            <p><strong>Brillify</strong><br>
+            Email: <strong>support@brillify.ai</strong><br>
+            Website: <a href="https://brillify.ai" style="color: var(--color-accent); text-decoration: none;">https://brillify.ai</a></p>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2025 Brillify. All Rights Reserved.</p>
+    <div class="footer-links">
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        <a href="/terms-of-service.html">Terms of Service</a>
+    </div>
+</footer>
+
+</body>
+</html>
