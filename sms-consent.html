@@ -10,20 +10,27 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <style>
         :root {
-            --color-bg: #0a0a0f;
-            --color-surface: #12121a;
-            --color-border: #1e1e2e;
-            --color-text: #e8e8ed;
-            --color-text-muted: #8888a0;
-            --color-accent: #4f8fff;
-            --color-accent-glow: rgba(79, 143, 255, 0.15);
-            --color-accent-hover: #6aa0ff;
+            --color-bg: #06060b;
+            --color-surface: #0f0f18;
+            --color-surface-raised: #161622;
+            --color-border: #1c1c30;
+            --color-border-hover: #2a2a48;
+            --color-text: #ededf2;
+            --color-text-muted: #7c7c9a;
+            --color-accent: #6366f1;
+            --color-accent-2: #a78bfa;
+            --color-accent-glow: rgba(99, 102, 241, 0.12);
+            --color-accent-hover: #818cf8;
             --color-success: #34d399;
+            --color-gradient-start: #6366f1;
+            --color-gradient-end: #a78bfa;
             --font-display: 'Instrument Serif', Georgia, serif;
             --font-body: 'DM Sans', -apple-system, sans-serif;
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: var(--font-body);
@@ -40,31 +47,38 @@
             left: 0;
             right: 0;
             z-index: 100;
-            padding: 1.25rem 2rem;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(10, 10, 15, 0.85);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--color-border);
+            background: rgba(6, 6, 11, 0.8);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(28, 28, 48, 0.6);
         }
 
         .logo {
-            font-family: var(--font-body);
-            font-size: 1.6rem;
+            font-family: var(--font-display);
+            font-size: 1.7rem;
             color: var(--color-text);
             text-decoration: none;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.01em;
         }
-        .logo span { color: var(--color-accent); }
+        .logo span {
+            background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
         .nav-links { display: flex; gap: 2rem; align-items: center; }
         .nav-links a {
             color: var(--color-text-muted);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 500;
             transition: color 0.2s;
+            letter-spacing: 0.01em;
         }
         .nav-links a:hover { color: var(--color-text); }
 
@@ -82,19 +96,23 @@
         }
 
         .page-label {
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--color-accent);
+            letter-spacing: 0.14em;
+            background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 1rem;
         }
 
         .page-title {
-            font-family: var(--font-body);
+            font-family: var(--font-display);
             font-size: clamp(2rem, 4vw, 3rem);
             letter-spacing: -0.02em;
             margin-bottom: 0.75rem;
+            font-weight: 400;
         }
 
         .page-subtitle {
@@ -114,8 +132,9 @@
         }
 
         .section h2 {
-            font-size: 1.25rem;
-            font-weight: 600;
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 400;
             margin-bottom: 0.75rem;
             color: var(--color-text);
         }
@@ -135,30 +154,49 @@
         .section ul li {
             color: var(--color-text-muted);
             font-size: 0.95rem;
-            padding: 0.35rem 0 0.35rem 1.5rem;
+            padding: 0.4rem 0 0.4rem 1.5rem;
             position: relative;
         }
 
         .section ul li::before {
-            content: '→';
+            content: '';
             position: absolute;
             left: 0;
-            color: var(--color-accent);
-            font-weight: 600;
+            top: 0.85em;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
         }
 
         /* --- Opt-In Demo Box --- */
         .consent-demo {
             background: var(--color-surface);
             border: 1px solid var(--color-border);
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 2rem;
             margin: 2.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .consent-demo::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 17px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), transparent 50%, rgba(167, 139, 250, 0.3));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
         }
 
         .consent-demo h3 {
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 400;
             margin-bottom: 1.25rem;
         }
 
@@ -168,28 +206,29 @@
 
         .form-field label {
             display: block;
-            font-size: 0.85rem;
+            font-size: 0.84rem;
             font-weight: 500;
             color: var(--color-text-muted);
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.5rem;
         }
 
         .form-field input[type="text"],
         .form-field input[type="tel"] {
             width: 100%;
-            padding: 0.8rem 1rem;
+            padding: 0.85rem 1rem;
             background: var(--color-bg);
             border: 1px solid var(--color-border);
-            border-radius: 8px;
+            border-radius: 10px;
             color: var(--color-text);
             font-family: var(--font-body);
             font-size: 0.95rem;
-            transition: border-color 0.2s;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
         .form-field input:focus {
             outline: none;
             border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
         }
 
         .consent-checkbox {
@@ -198,9 +237,9 @@
             gap: 0.75rem;
             margin: 1.25rem 0;
             padding: 1rem;
-            background: rgba(79, 143, 255, 0.05);
-            border: 1px solid rgba(79, 143, 255, 0.15);
-            border-radius: 8px;
+            background: rgba(99, 102, 241, 0.05);
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            border-radius: 10px;
         }
 
         .consent-checkbox input[type="checkbox"] {
@@ -220,44 +259,47 @@
         .consent-checkbox .consent-text a {
             color: var(--color-accent);
             text-decoration: none;
+            transition: color 0.2s;
         }
         .consent-checkbox .consent-text a:hover {
-            text-decoration: underline;
+            color: var(--color-accent-2);
         }
 
         .btn {
             display: inline-block;
             padding: 0.85rem 2rem;
-            border-radius: 8px;
+            border-radius: 10px;
             font-family: var(--font-body);
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             font-weight: 600;
             text-decoration: none;
-            transition: all 0.25s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             border: none;
-            background: var(--color-accent);
+            background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
             color: #fff;
             width: 100%;
             text-align: center;
+            box-shadow: 0 2px 16px rgba(99, 102, 241, 0.25);
+            letter-spacing: 0.01em;
         }
         .btn:hover {
-            background: var(--color-accent-hover);
-            box-shadow: 0 4px 24px rgba(79, 143, 255, 0.3);
+            box-shadow: 0 4px 32px rgba(99, 102, 241, 0.4);
+            transform: translateY(-1px);
         }
 
         /* --- Info Boxes --- */
         .info-box {
             background: var(--color-surface);
             border: 1px solid var(--color-border);
-            border-radius: 10px;
+            border-radius: 12px;
             padding: 1.25rem 1.5rem;
             margin: 1rem 0;
         }
 
         .info-box.highlight {
-            border-color: rgba(79, 143, 255, 0.3);
-            background: rgba(79, 143, 255, 0.05);
+            border-color: rgba(99, 102, 241, 0.3);
+            background: rgba(99, 102, 241, 0.05);
         }
 
         .info-box p {
@@ -266,12 +308,22 @@
         }
 
         .info-box code {
-            background: rgba(79, 143, 255, 0.1);
-            color: var(--color-accent);
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--color-accent-2);
             padding: 0.15rem 0.45rem;
-            border-radius: 4px;
+            border-radius: 5px;
             font-size: 0.88rem;
             font-weight: 600;
+        }
+
+        /* --- Links --- */
+        a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        a:hover {
+            color: var(--color-accent-2);
         }
 
         /* --- Footer --- */
@@ -427,7 +479,7 @@
     <div class="section">
         <h2>Privacy &amp; Data Protection</h2>
         <p>We respect your privacy. Phone numbers and consent records are stored securely and are used only for the purposes described in this policy. We do not sell, share, or rent your phone number or personal information to third parties for marketing purposes.</p>
-        <p>For complete details on how we handle your data, please review our <a href="/privacy-policy.html" style="color: var(--color-accent); text-decoration: none;">Privacy Policy</a>.</p>
+        <p>For complete details on how we handle your data, please review our <a href="/privacy-policy.html">Privacy Policy</a>.</p>
     </div>
 
     <!-- SECTION: Contact -->
@@ -437,7 +489,7 @@
         <div class="info-box">
             <p><strong>Brillify</strong><br>
             Email: <strong>support@brillify.ai</strong><br>
-            Website: <a href="https://brillify.ai" style="color: var(--color-accent); text-decoration: none;">https://brillify.ai</a></p>
+            Website: <a href="https://brillify.ai">https://brillify.ai</a></p>
         </div>
     </div>
 </main>

@@ -9,37 +9,44 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <style>
         :root {
-            --color-bg: #0a0a0f;
-            --color-surface: #12121a;
-            --color-border: #1e1e2e;
-            --color-text: #e8e8ed;
-            --color-text-muted: #8888a0;
-            --color-accent: #4f8fff;
+            --color-bg: #06060b;
+            --color-surface: #0f0f18;
+            --color-surface-raised: #161622;
+            --color-border: #1c1c30;
+            --color-border-hover: #2a2a48;
+            --color-text: #ededf2;
+            --color-text-muted: #7c7c9a;
+            --color-accent: #6366f1;
+            --color-accent-2: #a78bfa;
+            --color-gradient-start: #6366f1;
+            --color-gradient-end: #a78bfa;
             --font-display: 'Instrument Serif', Georgia, serif;
             --font-body: 'DM Sans', -apple-system, sans-serif;
         }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
         body { font-family: var(--font-body); background: var(--color-bg); color: var(--color-text); line-height: 1.7; -webkit-font-smoothing: antialiased; }
-        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.25rem 2rem; display: flex; justify-content: space-between; align-items: center; background: rgba(10,10,15,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--color-border); }
-        .logo { font-family: var(--font-body); font-size: 1.6rem; color: var(--color-text); text-decoration: none; }
-        .logo span { color: var(--color-accent); }
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; background: rgba(6, 6, 11, 0.8); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-bottom: 1px solid rgba(28, 28, 48, 0.6); }
+        .logo { font-family: var(--font-display); font-size: 1.7rem; color: var(--color-text); text-decoration: none; letter-spacing: -0.01em; }
+        .logo span { background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .nav-links { display: flex; gap: 2rem; }
-        .nav-links a { color: var(--color-text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+        .nav-links a { color: var(--color-text-muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s; letter-spacing: 0.01em; }
         .nav-links a:hover { color: var(--color-text); }
         .page-content { max-width: 760px; margin: 0 auto; padding: 8rem 2rem 4rem; }
         .page-header { margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--color-border); }
-        .page-label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-accent); margin-bottom: 1rem; }
-        .page-title { font-family: var(--font-body); font-size: clamp(2rem,4vw,3rem); letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+        .page-label { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1rem; }
+        .page-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.02em; margin-bottom: 0.75rem; font-weight: 400; }
         .last-updated { font-size: 0.82rem; color: var(--color-text-muted); margin-top: 0.5rem; }
         .section { margin-bottom: 2.5rem; }
-        .section h2 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem; }
+        .section h2 { font-family: var(--font-display); font-size: 1.35rem; font-weight: 400; margin-bottom: 0.75rem; }
         .section p { color: var(--color-text-muted); font-size: 0.95rem; margin-bottom: 0.75rem; }
         footer { border-top: 1px solid var(--color-border); padding: 2.5rem 2rem; display: flex; justify-content: space-between; align-items: center; max-width: 760px; margin: 2rem auto 0; flex-wrap: wrap; gap: 1rem; }
         footer p { font-size: 0.82rem; color: var(--color-text-muted); }
         .footer-links { display: flex; gap: 1.5rem; }
-        .footer-links a { font-size: 0.82rem; color: var(--color-text-muted); text-decoration: none; }
+        .footer-links a { font-size: 0.82rem; color: var(--color-text-muted); text-decoration: none; transition: color 0.2s; }
         .footer-links a:hover { color: var(--color-text); }
-        a { color: var(--color-accent); text-decoration: none; }
+        a { color: var(--color-accent); text-decoration: none; transition: color 0.2s; }
+        a:hover { color: var(--color-accent-2); }
         @media (max-width: 640px) { nav { padding: 1rem 1.25rem; } .page-content { padding: 7rem 1.25rem 3rem; } footer { flex-direction: column; text-align: center; } }
     </style>
 </head>
